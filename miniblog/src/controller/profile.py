@@ -24,6 +24,10 @@ def allowed_file(filename):
 @requires_login
 def main(user):
     '''Gets the user information and can update info when update'''
+    if user != session['user']:
+        flash('You are not authorized to view this profile.')
+        return redirect(url_for('home.main'))
+
     user = get_user(user)
     
     if request.method == 'POST':
